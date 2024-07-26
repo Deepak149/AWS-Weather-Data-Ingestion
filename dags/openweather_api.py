@@ -1,9 +1,9 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.models import Variable
+from airflow.providers.amazon.aws.operators.s3 import S3CreateObjectOperator
 from datetime import datetime, timedelta
 import json
-from airflow.providers.amazon.aws.operators.s3 import S3CreateObjectOperator
 import pandas as pd
 import requests
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
