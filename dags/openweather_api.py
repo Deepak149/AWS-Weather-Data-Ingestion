@@ -19,8 +19,6 @@ default_args = {
 
 dag = DAG('openweather_api_dag', default_args=default_args, schedule_interval="@once",catchup=False)
 
-# Set your OpenWeather API endpoint and parameters
-#api_endpoint = "https://api.openweathermap.org/data/2.5/weather"
 api_endpoint = "https://api.openweathermap.org/data/2.5/forecast"
 api_params = {
         "q": "Toronto,Canada",
@@ -49,7 +47,7 @@ extract_api_data = PythonOperator(
 upload_to_s3 = S3CreateObjectOperator(
         task_id="upload_to_S3",
         aws_conn_id= 'aws_default',
-        s3_bucket='weather-data-gds',
+        s3_bucket= 'weather-api-data-dump',
         s3_key='date={{ ds }}/weather_api_data.csv',
         data="{{ ti.xcom_pull(key='final_data') }}",
         dag=dag,
