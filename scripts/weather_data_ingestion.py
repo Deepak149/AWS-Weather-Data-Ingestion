@@ -22,7 +22,7 @@ weather_dyf = glueContext.create_dynamic_frame.from_options(
     connection_type="s3",
     format="csv",
     connection_options={
-        "paths": [f"s3://glue-weather-data/date={current_date}/weather_api_data.csv"],
+        "paths": [f"s3://weather-api-data-dump/date={current_date}/weather_api_data.csv"],
         "recurse": True,
     },
     transformation_ctx="weather_dyf",
