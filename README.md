@@ -13,12 +13,6 @@ https://api.openweathermap.org/data/2.5/forecast is the API call that I use with
 ## Solution Architecture
 ![architecture pic](architecture.png)
 
-When a new sales data file is uploaded to the S3 bucket, an EventBridge rule triggers an AWS Step Functions workflow to process the file. Each record in the file is assessed in the step functions workflow using an AWS Lambda function to determine if it contains both order information and contact information.
-
-If both order and contact information are present, the lambda function returns the record and is inserted into a DynamoDB table
-by the workflow which can be used for further processing and storage.
-If the contact information is missing, the lambda function raises an exception and the workflow places the record in a Dead Letter Queue (DLQ) in SQS for further inspection and correction.
-
 ### AWS Managed Airflow
 
 Two DAGs are created for this project.
