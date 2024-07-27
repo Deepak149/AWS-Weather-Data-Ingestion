@@ -29,7 +29,7 @@ Two DAGs are created for this project.
 
 ![dag-1](dag-2.png)
 
-- Triggers a Glue job that Reads the latest CSV file in the bucket by looking for the folder name with latest date.
+- Triggers a Glue job that Reads the latest CSV file in the bucket by looking for the folder name with current date.
 - The Glue job performs some schema transformations and loads the data to a redshift table.
 
 Since, a single json file contains multiple records, multiple invokations of lambda function is required. To facilitate simultaneous running of the same lambda function, the lambda invoke is placed inside MAP state. all the tasks inside the map state will run simultaneously for each record in the JSON file. 
