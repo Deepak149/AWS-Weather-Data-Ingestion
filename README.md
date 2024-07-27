@@ -53,7 +53,7 @@ This setup provides a robust and efficient mechanism to manage sales data, ensur
 ### CI/CD Pipeline
 
 - A CI/CD pipeline is created to automate code updates for the dags and the glue script.
-- Whenever a pull request is merged into the main branch of the GitHub repository, AWS CodeBuild is triggered.
+- Whenever a pull request is merged into the main branch of the GitHub repository, AWS CodeBuild is triggered and the buildspec file is run.
 - The code for the Glue script and the DAGs is updated in S3, ensuring the latest changes are deployed efficiently.
 
 ### Amazon Redshift
@@ -71,4 +71,4 @@ This setup provides a robust and efficient mechanism to manage sales data, ensur
 
 
 #### Data in Redshift
-![redshift-data](redshift_data.png)
+![redshift_data](redshift-data.png)
