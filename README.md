@@ -20,19 +20,18 @@ by the workflow which can be used for further processing and storage.
 If the contact information is missing, the lambda function raises an exception and the workflow places the record in a Dead Letter Queue (DLQ) in SQS for further inspection and correction.
 
 ### AWS Managed Airflow
-![state machine](step-function.png)
 
-Two DAGs are used here.
+Two DAGs are created for this project.
 
-DAG-1 : openweather_api_fetch.py
+#### DAG-1 : openweather_api_fetch.py
 
 ![dag-1](dag-1.png)
 
 - The DAG is configured to run daily, ensuring that fresh weather data is fetched and processed every day.
 - The fetched data is saved as a CSV file into an S3 bucket using Hive-style partitioning.
-- This dag triggers the second DAG which process this CSV file
+- This dag triggers the second DAG which process this CSV file<br><br>
 
-DAG-2 : transform_redshift_load.py
+#### DAG-2 : transform_redshift_load.py
 
 ![dag-1](dag-2.png)
 
@@ -41,7 +40,7 @@ DAG-2 : transform_redshift_load.py
 
 Since, a single json file contains multiple records, multiple invokations of lambda function is required. To facilitate simultaneous running of the same lambda function, the lambda invoke is placed inside MAP state. all the tasks inside the map state will run simultaneously for each record in the JSON file. 
 
-## Amazon S3
+### Amazon S3
 
 - Acts as the storage layer for raw weather data with date partitions.
 - Stores the code for the dags and the glue script.
@@ -51,13 +50,13 @@ Since, a single json file contains multiple records, multiple invokations of lam
 
 This setup provides a robust and efficient mechanism to manage sales data, ensuring high data quality and reliability.
 
-## CI/CD Pipeline
+### CI/CD Pipeline
 
 - A CI/CD pipeline is created to automate code updates for the dags and the glue script.
 - Whenever a pull request is merged into the main branch of the GitHub repository, AWS CodeBuild is triggered.
 - The code for the Glue script and the DAGs is updated in S3, ensuring the latest changes are deployed efficiently.
 
-## Amazon Redshift
+### Amazon Redshift
 
 - The processed data from Glue is loaded into a Redshift table.
 - Redshift serves as the data warehouse, enabling efficient querying and analysis of the weather data.
@@ -65,16 +64,11 @@ This setup provides a robust and efficient mechanism to manage sales data, ensur
 
 ## Sample Run
 
-The workflow is tested using the data from mock-data.json The step function states have executed successfully for each record and the complete records are inserted in dynamoDB while the incomplete ones are pushed to an SQS queue.
 
 
-#### Step Function
-![Step Function pic](state-machine-run.png)
+#### Successfull Build after pull request was merged
+![build](build.png)
 
 
-#### Data in DynamoDB
-![DynamoDB](dynamoDB-data.png)
-
-
-#### Data in SQS
-![SQS data](sqs-messages.png)
+#### Data in Redshift
+![redshift-data](redshift-data.png)
