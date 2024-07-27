@@ -4,7 +4,7 @@ This project aims to automate the process of fetching, storing, processing, and 
 
 
 ## OpenWeather API
-The OpenWeather is a free API to fetch to fetch the weather data that might be suitable for most of applications, up to the complex enterprise systems. There are many options avaiable and I went with the one provides the five days forecast.
+The OpenWeather is a free API to fetch the weather data that might be suitable for most of applications, up to the complex enterprise systems. There are many options avaiable and I went with the one provides the five days forecast.
 API Doc - https://openweathermap.org/forecast5
 
 https://api.openweathermap.org/data/2.5/forecast is the API call that I use with filtering on the city as 'Toronto,Canada'.
