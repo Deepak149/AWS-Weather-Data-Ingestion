@@ -71,4 +71,4 @@ This setup provides a robust and efficient mechanism to manage sales data, ensur
 
 
 #### Data in Redshift
-![redshift_data](redshift-data.png)
+![redshift_data](redshift_data.png)
