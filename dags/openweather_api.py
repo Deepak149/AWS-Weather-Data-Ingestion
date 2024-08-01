@@ -55,7 +55,7 @@ upload_to_s3 = S3CreateObjectOperator(
 
 trigger_transform_redshift_dag = TriggerDagRunOperator(
     task_id="trigger_transform_redshift_dag",
-    trigger_dag_id="transform_redshift_dag",  # Ensure this matches the DAG ID of your transform_redshift_dag
+    trigger_dag_id="transform_redshift_dag", 
     dag=dag,
 )
 
